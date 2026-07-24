@@ -1,4 +1,5 @@
 -- [[MouseWrapV2 : for COLEO's xWrap]]
+print("Loaded MouseWrapV2 | It. 1")
 
 local Character = Owner.Character
 local Event = Instance.new("UnreliableRemoteEvent")
