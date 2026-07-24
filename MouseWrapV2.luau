@@ -18,35 +18,36 @@ Event.OnServerEvent:Connect(function(player, position, target)
 end)
 
 local LS = NLS([[
-  local UserInputService = game:GetService("UserInputService")
-  local RunService = game:GetService("RunService")
+    local UserInputService = game:GetService("UserInputService")
+    local RunService = game:GetService("RunService")
   
-  local Character = Owner.Character
-  local RayDistance = 900
+    local Character = Owner.Character
+    local Event = Character:WaitForChild("MouseWrapV2")
+    local RayDistance = 900
 
   
-  RunService.RenderStepped:Connect(function() 
-    local camera = workspace.Camera
-    local mousePos = UserInputService:GetMouseLocation()
-    local viewportMouseRay = camera:ViewportPointToRay(mousePos.X, mousePos.Y)
+    RunService.RenderStepped:Connect(function() 
+        local camera = workspace.Camera
+        local mousePos = UserInputService:GetMouseLocation()
+        local viewportMouseRay = camera:ViewportPointToRay(mousePos.X, mousePos.Y)
 
-    local params = RaycastParams.new()
-    params.FilterType = Enum.RaycastFilterType.Exclude
-    params.FilterDescendantsInstances = {Character}
+        local params = RaycastParams.new()
+        params.FilterType = Enum.RaycastFilterType.Exclude
+        params.FilterDescendantsInstances = {Character}
 
-    local raycastRes = workspace:Raycast(viewportMouseRay.Origin, viewportMouseRay.Direction * RayDistance, params)
-    local hitPosition
-    local hitInstance = nil
+        local raycastRes = workspace:Raycast(viewportMouseRay.Origin, viewportMouseRay.Direction * RayDistance, params)
+        local hitPosition
+        local hitInstance = nil
     
-    if raycastRes then
-        hitPosition = rayCastResult.Position
-        hitInstance = rayCastResult.Instance
-    else
-        hitPosition = viewportMouseRay.Origin + viewportMouseRay.Direction * RayDistance
-    end
+        if raycastRes then
+            hitPosition = raycastRes.Position
+            hitInstance = raycastRes.Instance
+        else
+            hitPosition = viewportMouseRay.Origin + viewportMouseRay.Direction * RayDistance
+        end
 
-    Event:FireServer(hitPosition, hitInstance)
-  end)
+        Event:FireServer(hitPosition, hitInstance)
+      end)
 ]])
 
 return {
