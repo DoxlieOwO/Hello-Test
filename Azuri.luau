@@ -1,6 +1,8 @@
 --[[ // HEADER ----------------------------------------]]
 
 local Mouse = Owner:GetMouse()
+local MouseWrapV2 = include("https://raw.githubusercontent.com/DoxlieOwO/Hello-Test/refs/heads/main/MouseWrapV2.luau")
+
 local Character = Owner.Character
 local Humanoid = Character:WaitForChild("Humanoid")
 local Assets = game:GetObjects("rbxassetid://78538014263390")[2].Azuri
@@ -165,12 +167,18 @@ local function GetExclusions()
 end
 
 local function AzureBlast()
-  	local Hit = Mouse.Hit
+  	--[[local Hit = MouseWrapV2.GetCFrame()
   	local Origin = Character.HumanoidRootPart.Position
 	local MousePosition = Mouse.Hit.Position
 	local Exclusions = GetExclusions()
-	local ReliableCFrame = HitPatcher(Origin, MousePosition, Exclusions)
-  	local Offset = ReliableCFrame * CFrame.new(0, 10, 0)
+	local ReliableCFrame = Hit
+  	local Offset = ReliableCFrame * CFrame.new(0, 10, 0)]]
+	
+	local HitCFrame = Mouse.Hit
+	local TargetPosition = HitCFrame.Position
+	local BlastWorldPosition = TargetPosition + Vector3.new(0, 10, 0)
+    local Offset = CFrame.new(BlastWorldPosition)
+	local Exclusions = GetExclusions()
 
 
   	inAction = true
