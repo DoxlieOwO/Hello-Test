@@ -1,5 +1,6 @@
 ---------- // HEADER \\ ----------
 
+local Mouse = Owner:GetMouse()
 local Character = Owner.Character
 local Assets = game:GetObjects("rbxassetid://78538014263390")[2].Azuri
 print(Assets.Name)
@@ -8,7 +9,7 @@ print(Assets.Name)
 end]]
 local MusicId = "rbxassetid://91283569878673"
 local RunService = game:GetService("RunService")
-
+local Debris = game:GetService("Debris")
 
 local RootJoint = Character.HumanoidRootPart.RootJoint
 local Left_Shoulder = Character.Torso["Left Shoulder"]
@@ -86,11 +87,11 @@ print(Assets.Handle)
 
 ---------- // FUNCTIONS \\ ----------
 
-function SummonSFX(SoundID, RemoveAfterPlayed, Volume, PlaybackSpeed, Parent, PlaybackRegion) -- RemoveAfterPlayed doesn't work as intended, you can put false but it will still delete the audio when done anyway.
+local function SummonSFX(SoundID, RemoveAfterPlayed, Volume, PlaybackSpeed, Parent, PlaybackRegion) -- RemoveAfterPlayed doesn't work as intended, you can put false but it will still delete the audio when done anyway.
 	Volume = Volume or 1
 	PlaybackSpeed = PlaybackSpeed or 1
 	RemoveAfterPlayed = RemoveAfterPlayed or true
-	Parent = Parent or HumanoidRootPart
+	Parent = Parent or Character.HumanoidRootPart
 
 	local Sound = Instance.new("Sound")
 	Sound.SoundId = SoundID
