@@ -12,6 +12,7 @@ local LiveMouseData = {
 
 Event.OnServerEvent:Connect(function(player, position, target)
     if player == Owner then
+        print(position, target)
         LiveMouseData.Position = position or Vector3.new()
         LiveMouseData.Target = target
     end
@@ -39,7 +40,7 @@ local LS = NLS([[
         local hitPosition
         local hitInstance = nil
     
-        if raycastRes then
+        if raycastRes and typeof(raycastRes) ~= "number" then
             hitPosition = raycastRes.Position
             hitInstance = raycastRes.Instance
         else
