@@ -12,7 +12,7 @@ local LiveMouseData = {
 
 Event.OnServerEvent:Connect(function(player, position, target)
     if player == Owner then
-        LiveMouseData.Position = position
+        LiveMouseData.Position = position or Vector3.new()
         LiveMouseData.Target = target
     end
 end)
@@ -27,7 +27,7 @@ local LS = NLS([[
 
   
     RunService.RenderStepped:Connect(function() 
-        local camera = workspace.Camera
+        local camera = workspace.CurrentCamera
         local mousePos = UserInputService:GetMouseLocation()
         local viewportMouseRay = camera:ViewportPointToRay(mousePos.X, mousePos.Y)
 
@@ -43,7 +43,7 @@ local LS = NLS([[
             hitPosition = raycastRes.Position
             hitInstance = raycastRes.Instance
         else
-            hitPosition = viewportMouseRay.Origin + viewportMouseRay.Direction * RayDistance
+            hitPosition = (viewportMouseRay.Origin + viewportMouseRay.Direction * RayDistance)
         end
 
         Event:FireServer(hitPosition, hitInstance)
