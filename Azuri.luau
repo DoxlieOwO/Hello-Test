@@ -97,7 +97,9 @@ Assets.Handle.Parent = Character
 Assets.Legs.Parent = Character
 print(Assets.Handle)
 
-
+if Character.Head:FindFirstChildOfClass("Decal") then
+	Character.Head:FindFirstChildOfClass("Decal"):Destroy()
+end
 
 --[[ // FUNCTIONS ----------------------------------------]]
 
